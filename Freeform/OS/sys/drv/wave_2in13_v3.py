@@ -25,10 +25,27 @@ def print_screen(text,flip=True):
     font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
     image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame    
     draw = ImageDraw.Draw(image)
-    draw.text((0, 0), text, font = font15, fill = 0)
-    draw.text((0, 20), text, font = font15, fill = 0)
+    draw.text((0, 0), text, font = font24, fill = 0)
+    draw.text((0, 28), text, font = font15, fill = 0)
     if flip:
         image = image.rotate(180)
+    epd.display(epd.getbuffer(image))
+
+
+
+def badge_demo():
+    init_clear()
+    dbgprnt("Running badge demo")
+    epd = epd2in13_V3.EPD()
+    font15 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 15)
+    font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
+    image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame    
+    draw = ImageDraw.Draw(image)
+    draw.text((0, 0), "Walter Brobson", font = font24, fill = 0)
+    draw.text((0, 28), "Age 13", font = font15, fill = 0)
+    draw.text((0, 30), "Current mood: Happy", font = font15, fill = 0)
+    
+    image = image.rotate(180)
     epd.display(epd.getbuffer(image))
 
 
