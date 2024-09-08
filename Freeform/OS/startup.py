@@ -8,3 +8,5 @@ import wave_2in13_v3
 wave_2in13_v3.print_screen("Hello world!")
 sleep(5)
 wave_2in13_v3.clock_demo()
+sleep(2)
+wave_2in13_v3.sleep()

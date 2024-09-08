@@ -4,9 +4,12 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 
+def dbgprnt(text):
+    print(f"(DISPLAY) ==> {text}")
+
 def init_clear():
     epd = epd2in13_V3.EPD()
-    print("(DISPLAY) ==> init and Clear disp")
+    dbgprnt("Init and clear display")
     epd.init()
     epd.Clear(0xFF)
 
@@ -14,19 +17,23 @@ def init_clear():
     
 
 
-def print_screen(text):
+def print_screen(text,flip=True):
     init_clear()
+    dbgprnt(f"Printing '{text}' to screen...")
     epd = epd2in13_V3.EPD()
     font15 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 15)
     font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
     image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame    
     draw = ImageDraw.Draw(image)
     draw.text((120, 60), text, font = font15, fill = 0)
+    if flip:
+        image = image.rotate(180)
     epd.display(epd.getbuffer(image))
 
 
-def clock_demo():
+def clock_demo(flip=True):
     init_clear()
+    dbgprnt("Running clock demo")
     font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
     epd = epd2in13_V3.EPD()
     time_image = Image.new('1', (epd.height, epd.width), 255)
@@ -37,7 +44,13 @@ def clock_demo():
     while (True):
         time_draw.rectangle((120, 80, 220, 105), fill = 255)
         time_draw.text((120, 80), time.strftime('%H:%M:%S'), font = font24, fill = 0)
+        timeimage = timeimage.rotate(180)
         epd.displayPartial(epd.getbuffer(time_image))
         num = num + 1
         if(num == 10):
             break
+
+def sleep():
+    epd = epd2in13_V3.EPD()
+    dbgprnt("Display sleeping...")
+    epd.sleep()
