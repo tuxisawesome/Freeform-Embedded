@@ -31,7 +31,7 @@ def print_screen(text,flip=True):
     epd.display(epd.getbuffer(image))
 
 
-def clock_demo(flip=True):
+def clock_demo():
     init_clear()
     dbgprnt("Running clock demo")
     font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
@@ -44,7 +44,6 @@ def clock_demo(flip=True):
     while (True):
         time_draw.rectangle((120, 80, 220, 105), fill = 255)
         time_draw.text((120, 80), time.strftime('%H:%M:%S'), font = font24, fill = 0)
-        timeimage = timeimage.rotate(180)
         epd.displayPartial(epd.getbuffer(time_image))
         num = num + 1
         if(num == 10):
