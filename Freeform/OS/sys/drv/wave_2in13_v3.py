@@ -1,7 +1,6 @@
 import sys
-sys.path.insert(1, 'lib/')
 
-import epd2in13_V3 # Pick driver
+from lib import epd2in13_V3 # Pick driver
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
