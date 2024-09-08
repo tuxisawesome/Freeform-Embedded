@@ -43,7 +43,7 @@ def badge_demo():
     draw = ImageDraw.Draw(image)
     draw.text((0, 0), "Walter Brobson", font = font24, fill = 0)
     draw.text((0, 28), "Age 13", font = font15, fill = 0)
-    draw.text((0, 30), "Current mood: Happy", font = font15, fill = 0)
+    draw.text((0, 46), "Current mood: Happy", font = font15, fill = 0)
     
     image = image.rotate(180)
     epd.display(epd.getbuffer(image))
