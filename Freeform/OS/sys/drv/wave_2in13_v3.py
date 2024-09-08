@@ -25,7 +25,8 @@ def print_screen(text,flip=True):
     font24 = ImageFont.truetype(f"{os.path.dirname(__file__)}/Font.ttc", 24)
     image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame    
     draw = ImageDraw.Draw(image)
-    draw.text((120, 60), text, font = font15, fill = 0)
+    draw.text((0, 0), text, font = font15, fill = 0)
+    draw.text((0, 20), text, font = font15, fill = 0)
     if flip:
         image = image.rotate(180)
     epd.display(epd.getbuffer(image))
